@@ -16,6 +16,9 @@ body {
 .carousel-indicators {
     margin-bottom: 2px;
 }
+.playlist-icons {
+    font-size: 50px !important;
+}
 .carousel-of-random {
     width: 350px;
     margin: auto;

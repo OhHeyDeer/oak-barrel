@@ -8,6 +8,7 @@ import Container from 'react-bootstrap/Container';
 // Components
 import RandomDrinks from './components/RandomDrinks';
 import NavBarRight from './components/NavBarRight';
+import SearchBar from './components/SearchBar';
 
 const App = () => {
 
@@ -26,7 +27,7 @@ const App = () => {
                     </Col>
                 </Row>
                 <Row>
-                    Search
+                    <SearchBar />
                 </Row>
                 <Row>
                     <RandomDrinks />

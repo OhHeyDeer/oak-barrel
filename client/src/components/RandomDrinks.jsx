@@ -33,6 +33,7 @@ const RandomDrinks = () => {
             if (err) {
                 throw err;
             } else {
+                console.log(res.data.drinks);
                 changeRandomList(res.data.drinks);
                 changeFavs(JSON.parse(localStorage.getItem('my-favorite-drinks')));
             }
@@ -41,15 +42,13 @@ const RandomDrinks = () => {
 
     const handleAddFavorite = (drink) => {
         const storage = JSON.parse(localStorage.getItem('my-favorite-drinks'));
-
-
-        localStorage.setItem('my-favorite-drinks', JSON.stringify([drink.idDrink, ...storage]))
-        changeFavs([drink.idDrink, ...storage]);
+        localStorage.setItem('my-favorite-drinks', JSON.stringify([drink.strDrink, ...storage]))
+        changeFavs([drink.strDrink, ...storage]);
     }
     const handleRemoveFavorite = (drink) => {
         let storage = [...favoritesList];
         for (let i = 0; i < favoritesList.length; i++) {
-            if (storage[i] === drink.idDrink) {
+            if (storage[i] === drink.strDrink) {
                 storage.splice(i, 1);
                 localStorage.setItem('my-favorite-drinks', JSON.stringify(storage));
                 changeFavs(storage);
@@ -57,7 +56,7 @@ const RandomDrinks = () => {
         };
     }
 
-    console.log('State Change', favoritesList);
+    // console.log('State Change', favoritesList);
     return (
         <div>
             <Col xs="2"></Col>
@@ -66,7 +65,7 @@ const RandomDrinks = () => {
                     {randomList.map(drink => 
                     <Carousel.Item interval={3000}>
                         <div className="add-to-favorites" >
-                            {!JSON.parse(localStorage.getItem('my-favorite-drinks')).includes(drink.idDrink) ? <PlaylistAddIcon onClick={() => handleAddFavorite(drink)} /> : <PlaylistAddCheckIcon onClick={() => handleRemoveFavorite(drink)} />}
+                                {!JSON.parse(localStorage.getItem('my-favorite-drinks')).includes(drink.strDrink) ? <PlaylistAddIcon className="playlist-icons" onClick={() => handleAddFavorite(drink)} /> : <PlaylistAddCheckIcon className="playlist-icons" onClick={() => handleRemoveFavorite(drink)} />}
                         </div>
                         <img
                             src={drink.strDrinkThumb}

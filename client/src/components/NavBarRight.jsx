@@ -24,7 +24,7 @@ const NavBarRight = ({ change, changeVar }) => {
         storage.splice(index, 1);
         localStorage.setItem('my-favorite-drinks', JSON.stringify(storage));
         changeList(storage);
-        change(!changeVar); // In order for the re-render of the list so that the icons change
+        change(!changeVar); // In order for the re-render of the random drinks list so that the icons change
     }
 
     const handleOpenFavorites = () => {
