@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // React Bootstrap
 import Row from 'react-bootstrap/Row';
@@ -11,6 +11,8 @@ import NavBarRight from './components/NavBarRight';
 
 const App = () => {
 
+    const [shouldChange, updateChange] = useState(false);
+
     return (
         <Container style={{ marginRight: 0}}>
             <Col xs="2"></Col>
@@ -20,7 +22,7 @@ const App = () => {
                         <div className="drunks-r-us">Drunk's-R-Us</div>
                     </Col>
                     <Col>
-                        <NavBarRight />
+                        <NavBarRight change={updateChange} changeVar={shouldChange} />
                     </Col>
                 </Row>
                 <Row>

@@ -9,7 +9,7 @@ import Col from 'react-bootstrap/Col';
 // Material UI
 import ListIcon from '@material-ui/icons/List';
 
-const NavBarRight = () => {
+const NavBarRight = ({ change, changeVar }) => {
 
     const [isShow, changeShown] = useState(false);
     const [listOfFavs, changeList] = useState([]);
@@ -21,17 +21,16 @@ const NavBarRight = () => {
     const handleRemoveFavorite = (drink) => {
         let storage = JSON.parse(localStorage.getItem('my-favorite-drinks'));
         let index = storage.indexOf(drink);
-        console.log(index, storage);
         storage.splice(index, 1);
         localStorage.setItem('my-favorite-drinks', JSON.stringify(storage));
         changeList(storage);
+        change(!changeVar); // In order for the re-render of the list so that the icons change
     }
 
     const handleOpenFavorites = () => {
         changeList(JSON.parse(localStorage.getItem('my-favorite-drinks')));
         changeShown(!isShow);
     }
-
     return (
         <>
             <ListIcon className="favorite-drinks-list" onClick={() => handleOpenFavorites() } />
