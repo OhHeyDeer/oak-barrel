@@ -1,10 +1,10 @@
  /* Overall TopDown CSS */
 body {
-    background-color: #eeecda;
+    background-color: #cee397;
 }
 /* Styled Components */
 .drunks-r-us {
-    color: #f08a5d;
+    color: #3797a4;
     text-align: center;
     text-decoration: underline;
     justify-content: center;
@@ -20,46 +20,47 @@ body {
     font-size: 50px !important;
 }
 .carousel-of-random {
-    width: 350px;
+    width: 380px;
     margin: auto;
-    border: 5px solid #f08a5d;
+    border: 5px solid #8bcdcd;
     border-radius: 10px;
     z-index: 1;
 }
 
 .carousel-wrapper {
     justify-content: center;
+    margin-top: 30px;
     /* flex: 0;
     max-width: none; */
 }
 
 
 .carousel-caption {
-    border: 2px solid #f08a5d;
+    border: 2px solid #8bcdcd;
     border-radius: 15px;
     border-top-right-radius: 0;
     border-bottom-left-radius: 0;
-    background-color: #6a2c70bb;
+    background-color: #fcf776d0;
 }
 .carousel-title {
-    color: #f08a5d;
+    color: #3797a4;
     font-family: Merriweather;
     /* padding: 0px; */
     margin-bottom: 5px;
     font-size: 20px;
 }
 .carousel-description {
-    color: #f08a5d;
+    color: #8bcdcd;
     font-size: medium;
     margin: 0;
 }
 
 .carousel-control-next, .carousel-control-prev {
-    color: #f08a5d;
+    color: #8bcdcd;
 }
 
 .add-to-favorites {
-    color: #f08a5d;
+    color: #8bcdcd;
     position: absolute;
     float: right;
     padding: 10px;
@@ -67,14 +68,14 @@ body {
 }
 .add-to-favorites:hover {
     cursor: pointer;
-    color: #b83b5e;
+    color: #3797a4;
 }
 
 /* Favorites CSS */
 
 .favorite-drinks-list {
     z-index: 6;
-    color: #f08a5d;
+    color: #8bcdcd;
     float: right;
     font-size: 70px !important;
     margin-right: 0;
@@ -82,16 +83,90 @@ body {
 
 .favorite-drinks-list:hover {
     cursor: pointer !important;
-    color: #b83b5e;
+    color: #3797a4;
 }
 .favorite-drink-individual {
     padding: 2px;
     margin-top: 3px;
-    border: 2px solid blue;
+    border: 2px solid #3797a4;
     justify-content: center;
     border-radius: 10px;
 }
 .favorite-modal-title {
     padding: 10px;
     margin-bottom: 10px;
+}
+
+
+/* SearchBar Comp */
+.individual-ingredient {
+    border: 3px solid #8bcdcd;
+    border-radius: 10px;
+    color: #3797a4;
+    font-weight: 500;
+    padding: 5px;
+    margin: 5px;
+}
+.filter-bar {
+    padding: 25px;
+    margin: 20px;
+    justify-content: center;
+    text-align: center;
+    background-color: #8bcdcdc5;
+    border-radius: 10px;
+}
+.filter-button {
+    color: #3797a4 !important;
+    height: 55px !important;
+    font-size: 12px !important;
+    font-family: Merriweather !important;
+    background-color: #cee397 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    justify-content: center !important;
+    margin-left: 5px !important;
+    border: 3px solid #3797a4 !important;
+    margin-top: 15px !important;
+}
+.filter-button:hover {
+    background-color: #3797a4 !important;
+    color: #cee397 !important;
+    font-weight: 300;
+}
+.text-field-search-bar {
+    width: 250px;
+}
+
+/* Drinks List CSS */
+.drinks-list {
+    background-color: #3797a4;
+    padding: 20px;
+    margin: 10px;
+    margin-left: 5px;
+    margin-top: 20px;
+    border: 5px solid  #3797a4;
+    border-radius: 10px;
+    height: 400px;
+    width: 730px;
+    overflow-y: scroll;
+}
+.drink-search-tile {
+    width: 100px;
+    height: 330px;
+}
+.drink-search-tile {
+    padding: 10px;
+    margin-top: 10px;
+}
+.drink-search-one-tile {
+    margin: 10px;
+}
+.drink-list-header {
+    position: absolute;
+    z-index: 11;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 10px;
+    border-top-right-radius: 0px;
+    background-color: #3797a4d3;
 }

@@ -59,8 +59,7 @@ const RandomDrinks = () => {
     // console.log('State Change', favoritesList);
     return (
         <div>
-            <Col xs="2"></Col>
-            <Col xs="8" className="carousel-wrapper">
+            <Col className="carousel-wrapper">
                 <Carousel className="carousel-of-random">
                     {randomList.map(drink => 
                     <Carousel.Item interval={3000}>
@@ -70,7 +69,7 @@ const RandomDrinks = () => {
                         <img
                             src={drink.strDrinkThumb}
                             alt={drink.strDrink}
-                            style={{ border: "3px solid #f08a5d", borderRadius: "2px" }}
+                            style={{ border: "3px solid #8bcdcd", borderRadius: "2px" }}
                             className="d-block w-100"
                         />
                         <Carousel.Caption className="carousel-caption">
@@ -81,7 +80,6 @@ const RandomDrinks = () => {
                     )}
                 </Carousel>
             </Col>
-            <Col xs="2"></Col>
         </div>
     );
 

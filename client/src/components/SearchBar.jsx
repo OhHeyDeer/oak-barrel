@@ -1,9 +1,110 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-const SearchBar = () => {
+
+// React Bootstrap
+import Row from 'react-bootstrap/Row';
+
+
+
+// Material UI
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+
+// Routes
+import query from '../../lib/routes';
+
+
+const SearchBar = ({ searchDrinks }) => {
+    const [ingredientVar, changeIngredient] = useState('');
+
+    const [drinksList, changeDrinks] = useState([]); // the list of drinks to show
+
+    const [ingredientsList, changeIngredientsList] = useState([]);
+    const [ingredientFilters, changeIngredientFilters] = useState([]);
+
+    useEffect(() => {
+        query.getIngredients((err, data) => {
+            if (err) {
+                throw err;
+            } else {
+                changeIngredientsList(data.data.drinks);
+            }
+        })
+    },[])
+
+    const addIngredient = (ingredient) => {
+        let newArray = [];
+        ingredientsList.forEach( string => newArray.push(string.strIngredient1))
+        if (newArray.includes(ingredient)) {
+            if (!ingredientFilters.includes(ingredient)) {
+                changeIngredientFilters([ingredient, ...ingredientFilters]);
+                changeIngredient('');
+            }
+        }
+    }
+
+    const handleSearchDrinks = () => {
+        // Takes the list of ingredients and searches for drinks based on them.
+        query.filterSearchDrinks(ingredientFilters, (err, data) => {
+            if (err) {
+                throw err;
+            } else {
+                searchDrinks(data.data.drinks);
+                // Callback to change/render the list
+            }
+        });
+    }
+
     return (
-        <div>
-            Search
+        <div className="filter-bar" >
+            <Row>
+            <Autocomplete
+                freeSolo
+                disableClearable
+                id="outlined-helperText"
+                className="text-field-search-bar"
+                label="Add an Ingredient!"
+                variant="outlined"
+                getOptionLabel={(option) => option}
+                options={ingredientsList.length ? ingredientsList.map((option) => option.strIngredient1) : [{ strIngredient1: 'No Ingredients!' }].map((option) => option.strIngredient1)}
+                renderInput={(params) => (
+                    <TextField
+                        {...params}
+                        label="Add an Ingredient!"
+                        margin="normal"
+                        variant="outlined"
+                        InputProps={{ ...params.InputProps, type: 'search' }}
+                        />
+                        )}
+                onChange={(e, value) => changeIngredient(value)}
+                value={ingredientVar}
+            />
+            <Button
+                onClick={() => addIngredient(ingredientVar)}
+                variant="contained"
+                className="filter-button"
+            >
+            Add!</Button>
+                <div className="tag-list">
+
+                {/* Add the minicomponents when there are filter items added */}
+                {ingredientFilters.length ? ingredientFilters.map(ingredient => 
+                <div className="individual-ingredient">
+                    {ingredient}
+                </div>
+                    ): <div>Add Ingredients to your Search!</div>}
+                </div>
+            </Row>
+            {/* <Row>
+            </Row> */}
+            <Row>
+                <Button 
+                className="filter-button" 
+                color="primary"
+                onClick={() => handleSearchDrinks()}
+                >Search for Drinks!</Button>
+            </Row>
         </div>
     );
 }
