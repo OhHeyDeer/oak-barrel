@@ -10,6 +10,7 @@ import Row from 'react-bootstrap/Row';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 // Routes
 import query from '../../lib/routes';
@@ -35,13 +36,19 @@ const SearchBar = ({ searchDrinks }) => {
 
     const addIngredient = (ingredient) => {
         let newArray = [];
-        ingredientsList.forEach( string => newArray.push(string.strIngredient1))
+        ingredientsList.forEach( string => newArray.push(string.strIngredient1));
         if (newArray.includes(ingredient)) {
             if (!ingredientFilters.includes(ingredient)) {
                 changeIngredientFilters([ingredient, ...ingredientFilters]);
                 changeIngredient('');
             }
         }
+    }
+
+    const removeIngredient = (ingredient) => {
+        let newArray = [...ingredientFilters];
+        newArray.splice(newArray.indexOf(ingredient), 1);
+        changeIngredientFilters([...newArray]);
     }
 
     const handleSearchDrinks = () => {
@@ -87,12 +94,12 @@ const SearchBar = ({ searchDrinks }) => {
             >
             Add!</Button>
                 <div className="tag-list">
-
-                {/* Add the minicomponents when there are filter items added */}
-                {ingredientFilters.length ? ingredientFilters.map(ingredient => 
-                <div className="individual-ingredient">
-                    {ingredient}
-                </div>
+                    {/* Add the minicomponents when there are filter items added */}
+                    {ingredientFilters.length !==0 ? ingredientFilters.map(ingredient => 
+                    <div className="individual-ingredient">
+                        {ingredient}
+                        <HighlightOffIcon onClick={() => removeIngredient(ingredient)}></HighlightOffIcon>
+                    </div>
                     ): <div>Add Ingredients to your Search!</div>}
                 </div>
             </Row>

@@ -62,9 +62,9 @@ const RandomDrinks = () => {
             <Col className="carousel-wrapper">
                 <Carousel className="carousel-of-random">
                     {randomList.map(drink => 
-                    <Carousel.Item interval={3000}>
+                    <Carousel.Item interval={5000}>
                         <div className="add-to-favorites" >
-                                {!JSON.parse(localStorage.getItem('my-favorite-drinks')).includes(drink.strDrink) ? <PlaylistAddIcon className="playlist-icons" onClick={() => handleAddFavorite(drink)} /> : <PlaylistAddCheckIcon className="playlist-icons" onClick={() => handleRemoveFavorite(drink)} />}
+                            {!JSON.parse(localStorage.getItem('my-favorite-drinks')).includes(drink.strDrink) ? <PlaylistAddIcon className="playlist-icons" onClick={() => handleAddFavorite(drink)} /> : <PlaylistAddCheckIcon className="playlist-icons" onClick={() => handleRemoveFavorite(drink)} />}
                         </div>
                         <img
                             src={drink.strDrinkThumb}

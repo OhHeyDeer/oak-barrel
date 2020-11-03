@@ -27,9 +27,9 @@ const App = () => {
                     <NavBarRight change={updateChange} changeVar={shouldChange} />
                 </Col>
             </Row>
-            <Row>
+            <Row className="second-row-large">
                 <RandomDrinks />
-                <Col xs="6">
+                <Col xs="7">
                     <div className="drunks-r-us">Drunk's-R-Us</div>
                     <SearchBar searchDrinks={search} />
                 </Col>

@@ -14,7 +14,7 @@ import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
 
 const ListDrinks = ({ listOfDrinks }) => {
 
-    const [favorites, changeFavs] = useState([]);
+    const [favorites, changeFavs] = useState(['On Load']);
     const [nestedDrinkRows, changeNestedRows] = useState([]);
     // As a user I want to be able to search an ingredient and see the drinks I can make
     // Can enter search parameters which appear as minicomponents when added
@@ -25,12 +25,12 @@ const ListDrinks = ({ listOfDrinks }) => {
         const newList = [];
         let nestedList = [];
         for(let i = 1; i < listOfDrinks.length; i++) {
-            if (i % 2 === 0) { // On the fourth of every iteration
+            if (i % 3 === 0) { // On the fourth of every iteration
                 nestedList.push(listOfDrinks[i - 1]);
                 newList.push(nestedList);
                 nestedList = [];
             } else {
-                nestedList.push(listOfDrinks[i-1]);
+                nestedList.push(listOfDrinks[i - 1]);
             }
         }
         if (nestedList.length !== 0) {
@@ -61,7 +61,7 @@ const ListDrinks = ({ listOfDrinks }) => {
         <Col style={{ paddingLeft: "0px"}}>
             {listOfDrinks !== "None Found" && listOfDrinks.length ? <h2 className="drink-list-header">
                 How do these look?
-            </h2>: ''}
+            </h2> : ''}
             {listOfDrinks !== "None Found" && listOfDrinks.length ? 
             <div className="drinks-list">
                 {nestedDrinkRows.map( list => 
@@ -77,15 +77,16 @@ const ListDrinks = ({ listOfDrinks }) => {
                                 style={{ border: "3px solid #8bcdcd", borderRadius: "2px" }}
                                 className="d-block w-100"
                                 />
-                            <Carousel.Caption>
-                                <h3 className="carousel-title">{drink.strDrink}</h3>
+                            <Carousel.Caption className={list.length === 1 ? "three-drink-caption" : "drink-caption"}>
+                                <h3 className="drink-list-titles">{drink.strDrink}</h3>
                             </Carousel.Caption>
                         </Col>
                     )}
                 </Row>
                 )}
             </div>
-            : ''}
+                : ''} 
+            {/* Not Sure if this ^^ is working */}
         </Col>
     );
 }

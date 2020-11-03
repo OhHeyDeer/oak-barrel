@@ -12,6 +12,12 @@ body {
     font-family: Merriweather;
     padding: 30px;
 }
+.second-row-large {
+    background-color: #8bcdcda9;
+    border: 2px solid #3797a4;
+    border-radius: 15px;
+    margin-right: 50px;
+}
 /* Carousel CSS */
 .carousel-indicators {
     margin-bottom: 2px;
@@ -30,13 +36,14 @@ body {
 .carousel-wrapper {
     justify-content: center;
     margin-top: 30px;
+    padding: 20px;
     /* flex: 0;
     max-width: none; */
 }
 
 
 .carousel-caption {
-    border: 2px solid #8bcdcd;
+    border: 2px solid #3797a4;
     border-radius: 15px;
     border-top-right-radius: 0;
     border-bottom-left-radius: 0;
@@ -107,6 +114,9 @@ body {
     padding: 5px;
     margin: 5px;
 }
+.individual-ingredient:hover {
+    cursor: pointer;
+}
 .filter-bar {
     padding: 25px;
     margin: 20px;
@@ -139,24 +149,23 @@ body {
 
 /* Drinks List CSS */
 .drinks-list {
-    background-color: #3797a4;
+    background-color: #8bcdcd;
     padding: 20px;
     margin: 10px;
     margin-left: 5px;
     margin-top: 20px;
-    border: 5px solid  #3797a4;
+    border: 2px solid  #3797a4;
     border-radius: 10px;
     height: 400px;
-    width: 730px;
+    width: 1000px;
     overflow-y: scroll;
 }
-.drink-search-tile {
-    width: 100px;
-    height: 330px;
-}
+
 .drink-search-tile {
     padding: 10px;
     margin-top: 10px;
+    width: 100px;
+    height: 270px;
 }
 .drink-search-one-tile {
     margin: 10px;
@@ -164,9 +173,25 @@ body {
 .drink-list-header {
     position: absolute;
     z-index: 11;
-    margin: 5px;
+    margin: 0px 0px 0px 5px;
     padding: 5px;
+    border: 2px solid #3797a4bb;
     border-radius: 10px;
     border-top-right-radius: 0px;
-    background-color: #3797a4d3;
+    border-bottom-left-radius: 0px;
+    background-color: #8bcdcdc7;
+}
+.drink-list-titles {
+    color: #3797a4;
+    font-family: Merriweather;
+    /* padding: 0px; */
+    margin-bottom: 5px;
+    font-size: 20px;
+}
+.drink-caption {
+    margin-bottom: 10px;
+    bottom: -20px;
+}
+.three-drink-caption {
+    height: 100px;
 }
