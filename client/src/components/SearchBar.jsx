@@ -4,8 +4,6 @@ import React, { useState, useEffect } from 'react';
 // React Bootstrap
 import Row from 'react-bootstrap/Row';
 
-
-
 // Material UI
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';

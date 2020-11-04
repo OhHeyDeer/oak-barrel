@@ -16,7 +16,9 @@ body {
     background-color: #8bcdcda9;
     border: 2px solid #3797a4;
     border-radius: 15px;
-    margin-right: 50px;
+    margin-right: 200px;
+    margin-left: -300px;
+    
 }
 /* Carousel CSS */
 .carousel-indicators {
@@ -116,6 +118,9 @@ body {
 }
 .individual-ingredient:hover {
     cursor: pointer;
+    background-color: #71b8b8;
+    color: rgba(199, 24, 24, 0.863);
+    transition: background-color 450ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 }
 .filter-bar {
     padding: 25px;
@@ -152,12 +157,12 @@ body {
     background-color: #8bcdcd;
     padding: 20px;
     margin: 10px;
-    margin-left: 5px;
+    margin-left: -300px;
     margin-top: 20px;
     border: 2px solid  #3797a4;
     border-radius: 10px;
     height: 400px;
-    width: 1000px;
+    width: 1220px;
     overflow-y: scroll;
 }
 
@@ -173,7 +178,7 @@ body {
 .drink-list-header {
     position: absolute;
     z-index: 11;
-    margin: 0px 0px 0px 5px;
+    margin: 0px 0px 0px -300px;
     padding: 5px;
     border: 2px solid #3797a4bb;
     border-radius: 10px;
@@ -194,4 +199,8 @@ body {
 }
 .three-drink-caption {
     height: 100px;
+}
+/* The list of tags for the SearchBar Component */
+.tag-list {
+    padding: 10px;
 }

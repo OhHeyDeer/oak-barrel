@@ -1,6 +1,32 @@
 import axios from 'axios';
 import API_KEY from './hiddenKey';
 
+
+// ----------- DB Queries ------------
+const getAllUsers = (callback) => {
+    axios.get('http://localhost:3333/users')
+        .then(data => callback(null, data))
+        .catch(err => callback(err, null));
+}
+const getOneUser = (username, callback) => {
+    axios.get(`http://localhost:3333/users/${username}`)
+        .then(data => callback(null, data))
+        .catch(err => callback(err, null));
+}
+const postNewUser = (info, callback) => {
+    axios.get('http://localhost:3333/users', info)
+        .then(data => callback(null, data))
+        .catch(err => callback(err, null));
+}
+const updateExistingUser = (username, newIngredients, callback) => {
+    // This does not work however I will reach out for help getting it functional
+    axios.put('http://localhost:3333/users/update', { params: { name: username, ingredients: newIngredients }})
+        .then(data => callback(null, data))
+        .catch(err => callback(err, null));
+}
+
+// ----------- API CALLS ------------
+
 // Get 10 Random Drinks
 const getRandomDrinks = (callback) => {
     // change to an API key AND use the random enpoint once given a Key 
@@ -32,9 +58,6 @@ const filterSearchDrinks = (list, callback) => {
     newList.splice(0,1);
     newList.splice(newList.length-1, 1); // remove the brackets
     newList = newList.join('');
-    console.log(newList);
-    
-    console.log(newList);
     if (newList.split(',').length > 1) {
         axios.get(`https://www.thecocktaildb.com/api/json/v2/${API_KEY}/filter.php?i=${newList}`)
         .then(data => callback(null, data))
@@ -69,5 +92,9 @@ export default {
     searchIngredients,
     filterByIngredient,
     getIngredients,
-    filterSearchDrinks
+    filterSearchDrinks,
+    getAllUsers,
+    getOneUser,
+    postNewUser,
+    updateExistingUser
 }
