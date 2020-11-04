@@ -19,8 +19,7 @@ const postNewUser = (info, callback) => {
         .catch(err => callback(err, null));
 }
 const updateExistingUser = (username, newIngredients, callback) => {
-    // This does not work however I will reach out for help getting it functional
-    axios.put('http://localhost:3333/users/update', { params: { name: username, ingredients: newIngredients }})
+    axios.put('http://localhost:3333/users/update', { name: username, ingredients: newIngredients })
         .then(data => callback(null, data))
         .catch(err => callback(err, null));
 }

@@ -19,9 +19,9 @@ exports.addUser = (req, res) => {
 }
 
 exports.updateOne = (req, res) => {
-    return Users.updateOne({ username: req.params.name }, 
+    return Users.updateOne({ username: req.body.name }, 
         { 
-            $set: { "savedIngredients": req.params.ingredients }
+            $set: { "savedIngredients": req.body.ingredients }
         })
 }
 
