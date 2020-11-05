@@ -68,7 +68,7 @@ const filterSearchDrinks = (list, callback) => {
 
 // Search for a drink based on name
 const searchDrinks = (search, callback) => {
-    axios.get(`https://www.thecocktaildb.com/api/json/v2/${API_KEY}/search.php?i=${search}`)
+    axios.get(`https://www.thecocktaildb.com/api/json/v2/${API_KEY}/search.php?s=${search}`)
         .then(data => callback(null, data))
         .catch(err => callback(err, null));
 }

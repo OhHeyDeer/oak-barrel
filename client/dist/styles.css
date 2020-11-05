@@ -105,6 +105,9 @@ body {
     padding: 10px;
     margin-bottom: 10px;
 }
+.favorite-drinks-title {
+    color: #3797a4;
+}
 
 
 /* SearchBar Comp */
@@ -162,18 +165,21 @@ body {
     border: 2px solid  #3797a4;
     border-radius: 10px;
     height: 400px;
-    width: 1220px;
+    width: 1210px;
     overflow-y: scroll;
 }
 
 .drink-search-tile {
     padding: 10px;
-    margin-top: 10px;
+    margin: 40px;
     width: 100px;
     height: 270px;
+    text-align: center;
 }
 .drink-search-one-tile {
     margin: 10px;
+    width: 200px;
+    text-align: center;
 }
 .drink-list-header {
     position: absolute;
@@ -192,6 +198,11 @@ body {
     /* padding: 0px; */
     margin-bottom: 5px;
     font-size: 20px;
+    border: 2px solid #3797a4;
+    border-radius: 15px;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+    background-color: #fcf776d0;
 }
 .drink-caption {
     margin-bottom: 10px;
@@ -200,7 +211,69 @@ body {
 .three-drink-caption {
     height: 100px;
 }
+.card {
+    background-color: #8bcdcd;
+    border: none;
+}
 /* The list of tags for the SearchBar Component */
 .tag-list {
     padding: 10px;
+}
+/* CSS for Login Component */
+.login-button {
+    background-color: #8bcdcdc7 !important;
+    margin-left: 140px !important;
+}
+.login-button:hover {
+    background-color: #8bcdcd !important;
+}
+.login-modal {
+    background-color: #8bcdcd81;
+    font-family: Merriweather;
+}
+.login-title {
+    padding: 10px;
+    background-color: #3797a4;
+    color: #cee397;
+}
+.login-form {
+    background-color: #3797a4c2;
+    padding: 20px;
+}
+.login-buttons-row {
+    justify-content: center;
+    text-align: center;
+}
+.login-signup-buttons {
+    border: 2px solid #cee397;
+    width: 250px;
+}
+
+.list-popup {
+    background-color: #cee397;
+    border: 5px solid #fcf776b9;
+    font-family: Merriweather;
+}
+
+.button-remove-favorite {
+    padding: 10px;
+    margin-left: 170px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    border-radius: 10px;
+    background-color: #8bcdcd;
+}
+.add-ingredient-plus {
+    border: 2px solid green;
+    border-radius: 10px;
+    margin-left: 10px;
+    background-color: #cee397;
+    color: green;
+    width: 25px !important;
+    height: 25px !important;
+}
+.add-ingredient-plus:hover {
+    cursor: pointer;
+    color: white;
+    background-color: green;
 }

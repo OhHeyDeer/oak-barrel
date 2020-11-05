@@ -11,7 +11,6 @@ import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
 
 // Routes and Components
-import DrinksInfo from './DrinksInfo';
 import query from '../../lib/routes';
 
 const RandomDrinks = () => {
@@ -19,7 +18,7 @@ const RandomDrinks = () => {
     const [randomList, changeRandomList] = useState([]);
     const [favoritesList, changeFavs] = useState([]);
 
-    // const [drinkClick, changeClick] = useState(false);
+    const [clickedDrink, changeClick] = useState({});
 
     useEffect(() => {
         let unparsed = localStorage.getItem('my-favorite-drinks');
@@ -64,35 +63,28 @@ const RandomDrinks = () => {
         <div>
             <Col className="carousel-wrapper">
                 <Carousel className="carousel-of-random">
-                    {randomList.map(drink => {
-                    let shown = false;
-                    const changeClick = (value) => {
-                        shown = value;
-                    }
-
-                    // THIS DOESNT WORK
-                    return (
+                    {randomList.map(drink => 
                     <Carousel.Item interval={5000}>
                         <div className="add-to-favorites" >
                             {!JSON.parse(localStorage.getItem('my-favorite-drinks')).includes(drink.strDrink) ? <PlaylistAddIcon className="playlist-icons" onClick={() => handleAddFavorite(drink)} /> : <PlaylistAddCheckIcon className="playlist-icons" onClick={() => handleRemoveFavorite(drink)} />}
                         </div>
                         <img
-                            onClick={() => changeClick(true)}
+                            onClick={() => changeClick(drink)}
                             src={drink.strDrinkThumb}
                             alt={drink.strDrink}
                             style={{ border: "3px solid #8bcdcd", borderRadius: "2px" }}
                             className="d-block w-100"
                         />
-                        <Modal show={shown} onHide={() => changeClick(false)}>
+                        <Modal show={clickedDrink.strDrink ? true : false} onHide={() => changeClick({})}>
                             <Modal.Title>
-                                {drink.strDrink}
+                                {clickedDrink.strDrink}
                             </Modal.Title>
                         </Modal>
                         <Carousel.Caption className="carousel-caption">
                             <h3 className="carousel-title">{drink.strDrink}</h3>
                             <p className="carousel-description">{drink.strAlcoholic}</p>
                         </Carousel.Caption>
-                    </Carousel.Item>)}
+                    </Carousel.Item>
                     )}
                 </Carousel>
             </Col>

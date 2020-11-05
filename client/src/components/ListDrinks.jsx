@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
 // React Bootstrap
-import Container from 'react-bootstrap/Container';
-import Carousel from 'react-bootstrap/Carousel';
+// import Container from 'react-bootstrap/Container';
+import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
@@ -68,18 +68,15 @@ const ListDrinks = ({ listOfDrinks }) => {
                 <Row>
                     {list.map(drink =>
                         <Col className={list.length === 1 ? "drink-search-one-tile" : "drink-search-tile"}>
-                            <div className="add-to-favorites" >
-                                    {!JSON.parse(localStorage.getItem('my-favorite-drinks')).includes(drink.strDrink) ? <PlaylistAddIcon className="playlist-icons" onClick={() => handleAddFavorite(drink)} /> : <PlaylistAddCheckIcon className="playlist-icons" onClick={() => handleRemoveFavorite(drink)} />}
-                            </div>
-                            <img
-                                src={drink.strDrinkThumb}
-                                alt={drink.strDrink}
-                                style={{ border: "3px solid #8bcdcd", borderRadius: "2px" }}
-                                className="d-block w-100"
-                                />
-                            <Carousel.Caption className={list.length === 1 ? "three-drink-caption" : "drink-caption"}>
-                                <h3 className="drink-list-titles">{drink.strDrink}</h3>
-                            </Carousel.Caption>
+                            <Card>
+                                <Card.Img src={drink.strDrinkThumb} alt={drink.strDrink}/>
+                                <div className="add-to-favorites" >
+                                        {!JSON.parse(localStorage.getItem('my-favorite-drinks')).includes(drink.strDrink) ? <PlaylistAddIcon className="playlist-icons" onClick={() => handleAddFavorite(drink)} /> : <PlaylistAddCheckIcon className="playlist-icons" onClick={() => handleRemoveFavorite(drink)} />}
+                                </div>
+                                <Card.Title className="drink-list-titles">
+                                    {drink.strDrink}
+                                </Card.Title>
+                            </Card>
                         </Col>
                     )}
                 </Row>

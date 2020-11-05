@@ -6,6 +6,8 @@ import query from '../../lib/routes';
 // React Bootstrap Components
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Button from '@material-ui/core/Button';
 
 
@@ -57,8 +59,8 @@ const Login = ({ change, changeUser }) => {
     }, [clicked])
 
     useEffect(() => {
-        if (signup === true) {
-            const body = { name: name, pass: pass, ingredients: ingredients };
+        if (signup === true && name !== "" && pass !== "") {
+            const body = { name: name, pass: pass };
             query.postNewUser(body, (err, res) => {
                 if (err) {
                     throw err;
@@ -74,12 +76,12 @@ const Login = ({ change, changeUser }) => {
     
     return (
         <div>
-            <Button onClick={() => changeShown(true)}>Login</Button>
-            <Modal show={modalOpen} onHide={() => changeShown(false)}>
-                <Modal.Title>
+            <Button className="login-button" onClick={() => changeShown(true)}>Login</Button>
+            <Modal show={modalOpen} onHide={() => changeShown(false)} className="login-modal">
+                <Modal.Title className="login-title">
                     Login or Sign Up!
                 </Modal.Title>
-                <Form>
+                <Form className="login-form">
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Username</Form.Label>
                         <Form.Control type="username" placeholder="Enter username" onChange={(e) => changeName(e.target.value)}/>
@@ -89,7 +91,14 @@ const Login = ({ change, changeUser }) => {
                         <Form.Control type="password" placeholder="Password" onChange={(e) => changePass(e.target.value)}/>
                     </Form.Group>
                 </Form>
-                {shouldPromptCreate ? <Button onClick={() => {changeClicked(true); changeSignUp(true); } }>Sign Up!</Button> : <Button onClick={() => changeClicked(true)}>Login</Button>}
+                <Row className="login-buttons-row">
+                    <Col>
+                        <Button className="login-signup-buttons" onClick={() => {changeClicked(true); changeSignUp(true); } }>Sign Up!</Button> 
+                    </Col>
+                    <Col>
+                        <Button className="login-signup-buttons" onClick={() => changeClicked(true)}>Login</Button>
+                    </Col>
+                </Row>
             </Modal>
         </div>
     );

@@ -11,6 +11,7 @@ import Col from 'react-bootstrap/Col';
 
 // Material UI
 import ListIcon from '@material-ui/icons/List';
+import AddIcon from '@material-ui/icons/Add';
 
 // My Components
 import Login from './Login';
@@ -67,19 +68,24 @@ const NavBarRight = ({ change, changeVar }) => {
         <>
             <ListIcon className="favorite-drinks-list" onClick={() => handleOpenFavorites() } />
             <Modal show={isShow} onHide={() => changeShown(!isShow)}>
-                <Modal.Header>
+                <Modal.Header className="list-popup">
                     <Col>
                         <Row xs="12">
-                            <Modal.Title className="favorite-modal-title">
-                                My List
-                            </Modal.Title>
-                            {isLoggedIn ? `Logged in as ${loggedUser.username}` : <Login change={changeLoginStatus} changeUser={changeLoggedUser}/>}
+                            <Col>
+                                <Modal.Title className="favorite-modal-title">
+                                    {isLoggedIn ? 'My Profile' : 'My Drinks'}
+                                </Modal.Title>
+                            </Col>
+                            <Col>
+                                {isLoggedIn ? `Account: ${loggedUser.username}` : <Login change={changeLoginStatus} changeUser={changeLoggedUser}/>}
+                            </Col>
                         </Row>
                         <Row xs="12">
                             {isLoggedIn ? 
-                            <Card>
+                            <Card className="drinks-card">
                                 <Card.Header>
                                     My Ingredients
+                                    <AddIcon className="add-ingredient-plus"/> 
                                 </Card.Header>
                                 {/* The logic for saved ingredients per user */}
                                     {favoriteIngredients ?
@@ -104,14 +110,45 @@ const NavBarRight = ({ change, changeVar }) => {
                             : ''}
                         <Modal.Body>
                             {/* Close Button */}
-                            {listOfFavs.length >= 1 ? listOfFavs.map(favorite => 
+                            {isLoggedIn ? <h4 className="favorite-modal-title">My Saved Drinks:</h4>: ''}
+                            {listOfFavs.length >= 1 ? listOfFavs.map(favorite => {
+                                let drinkDetails = {};
+                                query.searchDrinks(favorite, (err, data) => {
+                                    if (err) {
+                                        throw err;
+                                    } else {
+                                        console.log(data.data.drinks[0]);
+                                        drinkDetails = data.data.drinks[0];
+                                    }
+                                });
+                                console.log(drinkDetails);
+                                const popover2 = (
+                                    <Popover id="popover-basic" style={{ width: "1000px", height: "300px" }}>
+                                        <Popover.Title as="h3">{favorite}</Popover.Title>
+                                        <Popover.Content>
+                                            <img src={drinkDetails.strDrinkThumb}></img>
+                                            <h5>Category: {drinkDetails.strCategory}</h5>
+                                            <p>
+                                                {drinkDetails.strInstructions}
+                                            </p>
+                                        </Popover.Content>
+                                    </Popover>
+                                );
+                            return (
+                            <OverlayTrigger trigger="click" placement="left" overlay={popover2}>
                                 <Row className="favorite-drink-individual">
-                                    <h4>
-                                        {favorite}
-                                    </h4>
-                                    <Button type="button" onClick={() => handleRemoveFavorite(favorite)} >X</Button>
+                                    <Col>
+                                        <h4 className="favorite-drinks-title">
+                                            {favorite}
+                                        </h4>
+                                    </Col>
+                                    <Col>
+                                        <Button className="button-remove-favorite" type="button" onClick={() => handleRemoveFavorite(favorite)} >X</Button>
+                                    </Col>
                                 </Row>
-                            ) : 'You have no favorites yet!' }
+                            </OverlayTrigger>
+                            )
+                            }) : 'You have no favorites yet!' }
                             {/* Delete From List */}
                         </Modal.Body>
                         </Row>
