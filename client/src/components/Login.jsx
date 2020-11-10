@@ -60,12 +60,12 @@ const Login = ({ change, changeUser }) => {
 
     useEffect(() => {
         if (signup === true && name !== "" && pass !== "") {
-            const body = { name: name, pass: pass };
+            const body = { name: name, pass: pass, ingredients: [] };
             query.postNewUser(body, (err, res) => {
                 if (err) {
                     throw err;
                 } else {
-                    const otherBody = { username: name, password: pass, ingredients: ingredients };
+                    const otherBody = { username: name, password: pass, savedIngredients: [] };
                     change(true);
                     changeUser(otherBody);
                     changeShown(false);

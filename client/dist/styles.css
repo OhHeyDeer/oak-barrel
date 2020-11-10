@@ -18,7 +18,9 @@ body {
     border-radius: 15px;
     margin-right: 200px;
     margin-left: -300px;
-    
+}
+.d-block:hover {
+    cursor: pointer;
 }
 /* Carousel CSS */
 .carousel-indicators {
@@ -73,7 +75,7 @@ body {
     position: absolute;
     float: right;
     padding: 10px;
-    z-index: 5;
+    z-index: 11;
 }
 .add-to-favorites:hover {
     cursor: pointer;
@@ -107,6 +109,9 @@ body {
 }
 .favorite-drinks-title {
     color: #3797a4;
+}
+.favorite-drinks-title-click {
+    color: #fcf876;
 }
 
 
@@ -168,7 +173,14 @@ body {
     width: 1210px;
     overflow-y: scroll;
 }
-
+/* The Drinks Card from a single drink in the list (the largest) */
+.drinks-single-tile {
+    width: 300px;
+    height: 270px;
+    margin: 10px;
+    margin-left: 25px;
+    margin-top: 40px;
+}
 .drink-search-tile {
     padding: 10px;
     margin: 40px;
@@ -191,6 +203,8 @@ body {
     border-top-right-radius: 0px;
     border-bottom-left-radius: 0px;
     background-color: #8bcdcdc7;
+    font-family: Merriweather;
+    color: #fcf876;
 }
 .drink-list-titles {
     color: #3797a4;
@@ -203,6 +217,14 @@ body {
     border-top-right-radius: 0px;
     border-top-left-radius: 0px;
     background-color: #fcf776d0;
+}
+.drinks-list-image {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    z-index: 10;
+}
+.drinks-list-image:hover {
+    cursor: pointer;
 }
 .drink-caption {
     margin-bottom: 10px;
@@ -263,6 +285,11 @@ body {
     border-radius: 10px;
     background-color: #8bcdcd;
 }
+.button-remove-favorite:hover {
+    background-color: #cd9e8bd0;
+}
+
+
 .add-ingredient-plus {
     border: 2px solid green;
     border-radius: 10px;
@@ -276,4 +303,39 @@ body {
     cursor: pointer;
     color: white;
     background-color: green;
+}
+.popup-image {
+    width: 140px;
+    height: 140px;
+    border: 5px solid #8bcdcd;
+}
+.popover-details {
+    width: 1000px;
+    height: 600px;
+    border-radius: 20px;
+    background-color: #8bcdcd;
+}
+.popover-header {
+    font-family: Merriweather;
+    background-color: #cee397;
+}
+
+/* Drink Details Modal CSS */
+.drinks-modal-title {
+    background-color: #cee397;
+    font-family: Merriweather;
+    color: #3797a4;
+    padding: 10px;
+    text-align: center;
+}
+.drinks-modal-overall {
+    background-color:#8bcdcd;
+    color: #fcf776;
+    padding: 30px;
+}
+.drinks-modal-list {
+    margin: 10px;
+    border: 2px solid #3797a4;
+    padding: 10px;
+    border-radius: 20px;
 }

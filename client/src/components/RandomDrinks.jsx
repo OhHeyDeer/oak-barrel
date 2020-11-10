@@ -58,6 +58,17 @@ const RandomDrinks = () => {
         };
     }
 
+    const handleDrinkClick = (drink) => {
+        query.searchDrinks(drink.strDrink, (err, data) => {
+            if (err) {
+                throw err;
+            } else {
+                console.log(data.data.drinks[0]);
+                changeClick(data.data.drinks[0]);
+            }
+        })
+    }
+
     // console.log('State Change', favoritesList);
     return (
         <div>
@@ -69,16 +80,45 @@ const RandomDrinks = () => {
                             {!JSON.parse(localStorage.getItem('my-favorite-drinks')).includes(drink.strDrink) ? <PlaylistAddIcon className="playlist-icons" onClick={() => handleAddFavorite(drink)} /> : <PlaylistAddCheckIcon className="playlist-icons" onClick={() => handleRemoveFavorite(drink)} />}
                         </div>
                         <img
-                            onClick={() => changeClick(drink)}
+                            onClick={() => handleDrinkClick(drink)}
                             src={drink.strDrinkThumb}
                             alt={drink.strDrink}
                             style={{ border: "3px solid #8bcdcd", borderRadius: "2px" }}
                             className="d-block w-100"
                         />
                         <Modal show={clickedDrink.strDrink ? true : false} onHide={() => changeClick({})}>
-                            <Modal.Title>
+                            <Modal.Title className="drinks-modal-title">
                                 {clickedDrink.strDrink}
                             </Modal.Title>
+                            <Modal.Body className="drinks-modal-overall">
+                                <h5 style={{ color: "#3797a4" }}>Category: <a style={{ color: "#fcf776" }}>{clickedDrink.strCategory}</a></h5>
+                                <h5 style={{ color: "#3797a4" }}>Glass: <a style={{ color: "#fcf776" }}>{clickedDrink.strGlass}</a></h5>
+                                <div className="drinks-modal-list">
+                                    <h5 style={{ color: "#3797a4"}}>Ingredients: </h5>
+                                    <ul> 
+                                        {/* Conditionally rendering versus mapping across and creating an array */}
+                                        {clickedDrink.strIngredient1 ? <li>{clickedDrink.strMeasure1 + " " }{clickedDrink.strIngredient1}</li> : ''}
+                                        {clickedDrink.strIngredient2 ? <li>{clickedDrink.strMeasure2 + " " }{clickedDrink.strIngredient2}</li> : ''}
+                                        {clickedDrink.strIngredient3 ? <li>{clickedDrink.strMeasure3 + " " }{clickedDrink.strIngredient3}</li> : ''}
+                                        {clickedDrink.strIngredient4 ? <li>{clickedDrink.strMeasure4 + " " }{clickedDrink.strIngredient4}</li> : ''}
+                                        {clickedDrink.strIngredient5 ? <li>{clickedDrink.strMeasure5 + " " }{clickedDrink.strIngredient5}</li> : ''}
+                                        {clickedDrink.strIngredient6 ? <li>{clickedDrink.strMeasure6 + " " }{clickedDrink.strIngredient6}</li> : ''}
+                                        {clickedDrink.strIngredient7 ? <li>{clickedDrink.strMeasure7 + " " }{clickedDrink.strIngredient7}</li> : ''}
+                                        {clickedDrink.strIngredient8 ? <li>{clickedDrink.strMeasure8 + " " }{clickedDrink.strIngredient8}</li> : ''}
+                                        {clickedDrink.strIngredient9 ? <li>{clickedDrink.strMeasure9 + " " }{clickedDrink.strIngredient9}</li> : ''}
+                                        {clickedDrink.strIngredient10 ? <li>{clickedDrink.strMeasure10 + " "}{clickedDrink.strIngredient10}</li> : ''}
+                                        {clickedDrink.strIngredient11 ? <li>{clickedDrink.strMeasure11 + " "}{clickedDrink.strIngredient11}</li> : ''}
+                                        {clickedDrink.strIngredient12 ? <li>{clickedDrink.strMeasure12 + " "}{clickedDrink.strIngredient12}</li> : ''}
+                                        {clickedDrink.strIngredient13 ? <li>{clickedDrink.strMeasure13 + " "}{clickedDrink.strIngredient13}</li> : ''}
+                                        {clickedDrink.strIngredient14 ? <li>{clickedDrink.strMeasure14 + " "}{clickedDrink.strIngredient14}</li> : ''}
+                                        {clickedDrink.strIngredient15 ? <li>{clickedDrink.strMeasure15 + " "}{clickedDrink.strIngredient15}</li> : ''}
+                                    </ul>
+                                </div>
+                                <div className="drinks-modal-list">
+                                    <h5 style={{ color: "#3797a4" }}>Instructions:</h5>
+                                    <p>{clickedDrink.strInstructions}</p>
+                                </div>
+                            </Modal.Body>
                         </Modal>
                         <Carousel.Caption className="carousel-caption">
                             <h3 className="carousel-title">{drink.strDrink}</h3>
