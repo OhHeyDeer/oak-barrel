@@ -26,6 +26,9 @@
 * As a user I want to be able to randomly give the user a drink that is popular.
 * Future Enhancement: allow for user to toggle whether the random drink is filtered by ingredients
 
+### Starting it up:
+* npm run build -- Starts up Webpack and Babel
+* npm start -- Runs express server at port 3333
 
-API:
+### API:
 [The Cocktail Database](https://www.thecocktaildb.com/api.php)
