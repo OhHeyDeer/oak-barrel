@@ -6,12 +6,10 @@
 * Stores a users favorite drinks within their browsers local storage, giving them access everytime they open the page.
 
 ## Application in Use:
-![](Drunks-R-Us.gif)
-![](Drunks-R-Us2.gif)
-![](Drunks-R-Us3.gif)
-![](Drunks-R-Us4.gif)
-![](Drunks-R-Us5.gif)
-
+![](drinks-r-us1.gif)
+![](drinks-r-us2.gif)
+![](drinks-r-us3.gif)
+![](drinks-r-us4.gif)
 
 
 ### Technologies Used: 

@@ -30,7 +30,7 @@ const App = () => {
             <Row className="second-row-large">
                 <RandomDrinks />
                 <Col xs="7">
-                    <div className="drunks-r-us">Drunk's-R-Us</div>
+                    <div className="drunks-r-us">Oak Barrel</div>
                     <SearchBar searchDrinks={search} />
                 </Col>
             </Row>
