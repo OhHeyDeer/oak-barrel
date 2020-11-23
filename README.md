@@ -1,4 +1,4 @@
-# Drinks-R-Us
+# Oak Barrel
 
 ## Cocktail Selection Application
 * A Full Stack cocktail selection application that allows a user to search through a database of cocktails, filtering out drinks based on the ingredients they have.
