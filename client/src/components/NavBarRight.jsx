@@ -56,6 +56,8 @@ const NavBarRight = ({ change, changeVar }) => {
 
     const handleRemoveFavorite = (drink) => {
 
+        document.body.click();
+
         let newArr = [...isNotClicked];
         newArr.splice(newArr.indexOf(drink), 1);
         changeIsNotClicked(newArr);
@@ -241,18 +243,18 @@ const NavBarRight = ({ change, changeVar }) => {
                                         </Popover>
                                     );
                                     return (
-                                    <OverlayTrigger trigger="click" placement="left" overlay={popover2} >
                                         <Row className="favorite-drink-individual" >
-                                            <Col onClick={() => handleGetDrinkDetails(favorite, () => console.log('Finish Query'))}>
-                                                <h4 className={!isNotClicked.includes(favorite) ? "favorite-drinks-title" : "favorite-drinks-title-click"}  >
-                                                    {favorite}
-                                                </h4>
+                                            <Col>
+                                                    <h4 className={!isNotClicked.includes(favorite) ? "favorite-drinks-title" : "favorite-drinks-title-click"} onClick={() => handleGetDrinkDetails(favorite, () => console.log('Finish Query'))}>
+                                                        <OverlayTrigger rootClose={true} trigger="click" placement="left" overlay={popover2}>
+                                                            <a>{favorite}</a>
+                                                        </OverlayTrigger>
+                                                    </h4>
                                             </Col>
                                             <Col>
                                                 <Button className="button-remove-favorite" type="button" onClick={() => handleRemoveFavorite(favorite)} >X</Button>
                                             </Col>
                                         </Row>
-                                    </OverlayTrigger>
                                     )
                             }) : 'You have no favorites yet!' }
                             {/* Delete From List */}

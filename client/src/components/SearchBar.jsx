@@ -63,6 +63,7 @@ const SearchBar = ({ searchDrinks }) => {
 
     return (
         <div className="filter-bar" >
+            <h4 className="carousel-title">Filter Drinks by Ingredient</h4>
             <Row>
             <Autocomplete
                 freeSolo

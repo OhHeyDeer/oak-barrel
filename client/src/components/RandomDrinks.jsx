@@ -73,6 +73,7 @@ const RandomDrinks = () => {
     return (
         <div>
             <Col className="carousel-wrapper">
+                <h4 className="carousel-title" style={{ textAlign: "center"}}>Drinks you might like:</h4>
                 <Carousel className="carousel-of-random">
                     {randomList.map(drink => 
                     <Carousel.Item interval={5000}>
