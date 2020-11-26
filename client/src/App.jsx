@@ -38,7 +38,6 @@ const App = () => {
             <Row>
                 {/* Add in title for the random drinks */}
                 {/* Add in a popular drinks component */}
-
                 {/* Conditionally render random drinks or list dependent on the search */}
             </Row>
         </Container>
