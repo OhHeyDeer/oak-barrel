@@ -159,6 +159,13 @@ body {
 .text-field-search-bar {
     width: 250px;
 }
+.add-ingredients-to-search {
+    color:#3797a4;
+    font-family: Merriweather;
+    font-size: 15px;
+    margin: 10px;
+
+}
 
 /* Drinks List CSS */
 .drinks-list {
@@ -167,11 +174,12 @@ body {
     margin: 10px;
     margin-left: -300px;
     margin-top: 20px;
+    padding-bottom: 50px;
     border: 2px solid  #3797a4;
     border-radius: 10px;
-    height: 400px;
+    /* height: 400px; */
     width: 1210px;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
 }
 /* The Drinks Card from a single drink in the list (the largest) */
 .drinks-single-tile {
@@ -339,3 +347,8 @@ body {
     padding: 10px;
     border-radius: 20px;
 }
+
+
+/* ID NAMES */
+
+/* Searchbar.jsx */

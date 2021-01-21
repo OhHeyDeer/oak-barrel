@@ -50,13 +50,25 @@ const filterByIngredient = (ingredient, callback) => {
 
 // Search for a drink based on ingredients
 const filterSearchDrinks = (list, callback) => {
+    // good ingredients and bad ingredients list
+    
 
+    const recursivelyFind10Drinks = (ingredientsList) => {
+        // takes in an ingredients list. 
+        // splits and turns the list into a string
+        // queries the API
+        // checks if there are more than 10 drinks in the response
+        // calls back the function if there are NOT drinks without one ingredient
+       // otherwise, if there ARE drinks, callback on the list
+    }
     let string = JSON.stringify(list);
     let newList = string.split('"').join(''); // turn into a string for the url
-    newList = newList.split('');
+
+    newList = newList.split(''); 
     newList.splice(0,1);
     newList.splice(newList.length-1, 1); // remove the brackets
     newList = newList.join('');
+
     if (newList.split(',').length > 1) {
         axios.get(`https://www.thecocktaildb.com/api/json/v2/${API_KEY}/filter.php?i=${newList}`)
         .then(data => callback(null, data))

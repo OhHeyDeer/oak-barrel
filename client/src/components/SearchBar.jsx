@@ -17,10 +17,10 @@ import query from '../../lib/routes';
 const SearchBar = ({ searchDrinks }) => {
     const [ingredientVar, changeIngredient] = useState('');
 
-    const [drinksList, changeDrinks] = useState([]); // the list of drinks to show
-
     const [ingredientsList, changeIngredientsList] = useState([]);
     const [ingredientFilters, changeIngredientFilters] = useState([]);
+
+    const [drinksFound, changeDrinksFound] = useState(true);
 
     useEffect(() => {
         query.getIngredients((err, data) => {
@@ -55,8 +55,18 @@ const SearchBar = ({ searchDrinks }) => {
             if (err) {
                 throw err;
             } else {
-                searchDrinks(data.data.drinks);
-                // Callback to change/render the list
+                const drinks = data.data.drinks;
+                if (drinks === 'None Found') {
+                    // Tells the user there are no drinks for the ingredients given
+                    changeDrinksFound(false);
+
+                    // FUTURE ENHANCEMENT: if none are found, search again with one less ingredient until 10 similar drinks can be found. -- CODE ON BACKEND MAKE A RECURSIVE QUERY                  
+                } else {
+                    // Callback to change/render the list
+                    changeDrinksFound(true);
+                    searchDrinks(drinks);
+                }
+
             }
         });
     }
@@ -94,12 +104,20 @@ const SearchBar = ({ searchDrinks }) => {
             Add!</Button>
                 <div className="tag-list">
                     {/* Add the minicomponents when there are filter items added */}
-                    {ingredientFilters.length !==0 ? ingredientFilters.map(ingredient => 
-                    <div className="individual-ingredient">
-                        {ingredient}
-                        <HighlightOffIcon onClick={() => removeIngredient(ingredient)}></HighlightOffIcon>
-                    </div>
-                    ): <div>Add Ingredients to your Search!</div>}
+                    { drinksFound ? '' :
+                    (<div class="add-ingredients-to-search">
+                        No Drinks Found!
+                    </div>)}
+                    {ingredientFilters.length !== 0 ? ingredientFilters.map(ingredient => 
+                        <div className="individual-ingredient">
+                            {ingredient}
+                            <HighlightOffIcon onClick={() => removeIngredient(ingredient)}></HighlightOffIcon>
+                        </div>
+                        )
+                    : 
+                    <div>
+                        <h5 className="add-ingredients-to-search" >Add Ingredients to your Search!</h5>
+                    </div>}
                 </div>
             </Row>
             {/* <Row>

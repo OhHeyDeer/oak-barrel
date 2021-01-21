@@ -119,7 +119,6 @@ const NavBarRight = ({ change, changeVar }) => {
             if (err) {
                 throw err;
             } else {
-                console.log(data.data.drinks[0]);
                 changeDetails(data.data.drinks[0]);
                 callback();
             }
@@ -207,7 +206,7 @@ const NavBarRight = ({ change, changeVar }) => {
                         <Modal.Body>
                             {/* Close Button */}
                             {isLoggedIn ? <h4 className="favorite-modal-title">My Saved Drinks:</h4>: ''}
-                            {listOfFavs.length >= 1 ? listOfFavs.map(favorite => {
+                            {(listOfFavs === null || listOfFavs.length >= 1) ? listOfFavs.map(favorite => {
                                     const popover2 = (
                                         <Popover id="popover-basic" className="popover-details">
                                             <Popover.Title as="h3">{favorite}</Popover.Title>

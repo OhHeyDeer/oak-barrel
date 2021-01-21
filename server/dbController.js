@@ -5,7 +5,7 @@ exports.getAll = (req, res) => {
 }
 
 exports.getOne = (req, res) => {
-    console.log(req.params.name);
+    // console.log(req.params.name);
     return Users.findOne({ username: req.params.name});
 }
 
