@@ -112,8 +112,6 @@ const NavBarRight = ({ change, changeVar }) => {
         } else {
             changeIsNotClicked([favorite, ...isNotClicked]);
         }
- 
-
 
         query.searchDrinks(favorite, (err, data) => {
             if (err) {
