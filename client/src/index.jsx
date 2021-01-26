@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 import App from './App.jsx';
-import exitIntent from 'exit-intent';
+// import exitIntent from 'exit-intent';
 
 // Initialise
 // const removeExitIntent = exitIntent({

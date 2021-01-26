@@ -11,7 +11,7 @@ import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
 
 // Routes and Components
-import query from '../../lib/routes';
+import query from '../../lib/routes.js';
 
 const RandomDrinks = () => {
     

@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { ids } from 'webpack';
 import API_KEY from './hiddenKey';
 
 
@@ -52,78 +51,78 @@ const filterByIngredient = (ingredient, callback) => {
 // Search for a drink based on ingredients
 const filterSearchDrinks = (list, callback) => {
     // good ingredients and bad ingredients list
-    const overallDrinksFound = [];
+    // const overallDrinksFound = [];
 
-    const recursivelyFind15Drinks = (ingredientsList) => {
-        // takes in an ingredients list. 
-        let stringArrayOfIngredients = JSON.stringify(ingredientsList);
-        // splits and turns the list into a string
-        let arrayOfIngredients = stringArrayOfIngredients.split('"').join(''); // Remove the quotes
-        arrayOfIngredients = arrayOfIngredients.split('');
-        arrayOfIngredients.splice(0, 1); // remove the front brackets
-        arrayOfIngredients.splice(arrayOfIngredients.length - 1, 1); // remove the back brackets
-        arrayOfIngredients = arrayOfIngredients.join(''); // join into a list of comma separated words/ingredients
+    // const recursivelyFind15Drinks = (ingredientsList) => {
+    //     // takes in an ingredients list. 
+    //     let stringArrayOfIngredients = JSON.stringify(ingredientsList);
+    //     // splits and turns the list into a string
+    //     let arrayOfIngredients = stringArrayOfIngredients.split('"').join(''); // Remove the quotes
+    //     arrayOfIngredients = arrayOfIngredients.split('');
+    //     arrayOfIngredients.splice(0, 1); // remove the front brackets
+    //     arrayOfIngredients.splice(arrayOfIngredients.length - 1, 1); // remove the back brackets
+    //     arrayOfIngredients = arrayOfIngredients.join(''); // join into a list of comma separated words/ingredients
 
-        // queries the API
-        if (arrayOfIngredients.split(',').length > 1) { // Check which query to make
-            axios.get(`https://www.thecocktaildb.com/api/json/v2/${API_KEY}/filter.php?i=${arrayOfIngredients}`)
-                .then(data => {
-                    console.log(data);
-                    if (data.drinks.length + overallDrinksFound.length < 15) {
-                        overallDrinksFound.concat(data.data.drinks);
-                        // remove last ingredient and run again
-                        ingredientsList.pop();
-                        recursivelyFind15Drinks(ingredientsList);
-                    } else {
-                        callback(null, overallDrinksFound);
-                    }
-                })
-                .catch(err => {
-                    console.log(err);
-                    callback(err,null);
-                });
-        } else {
-            if (overallDrinksFound.length > 9) {
-                callback(null, {data: {data: {drinks: overallDrinksFound}}})
-            } else {
-                filterByIngredient(arrayOfIngredients, (err, data) => {
-                    if (err) {
-                        callback(err, null);
-                    } else {
-                        overallDrinksFound.concat(data.data.drinks);
-                        callback(null, overallDrinksFound);
-                    }
-                });
-            }
-        }
-    }
-    
-    recursivelyFind15Drinks(list);
-
-
-
-
-
-
-
-
-
-
-    // let string = JSON.stringify(list);
-    // let newList = string.split('"').join(''); // turn into a string for the url
-
-    // newList = newList.split(''); 
-    // newList.splice(0,1);
-    // newList.splice(newList.length-1, 1); // remove the brackets
-    // newList = newList.join('');
-
-    // if (newList.split(',').length > 1) {
-    //     axios.get(`https://www.thecocktaildb.com/api/json/v2/${API_KEY}/filter.php?i=${newList}`)
-    //     .then(data => callback(null, data))
-    //     .catch(err => callback(err, null));
-    // } else {
-    //     filterByIngredient(newList, callback);
+    //     // queries the API
+    //     if (arrayOfIngredients.split(',').length > 1) { // Check which query to make
+    //         axios.get(`https://www.thecocktaildb.com/api/json/v2/${API_KEY}/filter.php?i=${arrayOfIngredients}`)
+    //             .then(data => {
+    //                 console.log(data);
+    //                 if (data.drinks.length + overallDrinksFound.length < 15) {
+    //                     overallDrinksFound.concat(data.data.drinks);
+    //                     // remove last ingredient and run again
+    //                     ingredientsList.pop();
+    //                     recursivelyFind15Drinks(ingredientsList);
+    //                 } else {
+    //                     callback(null, overallDrinksFound);
+    //                 }
+    //             })
+    //             .catch(err => {
+    //                 console.log(err);
+    //                 callback(err,null);
+    //             });
+    //     } else {
+    //         if (overallDrinksFound.length > 9) {
+    //             callback(null, {data: {data: {drinks: overallDrinksFound}}})
+    //         } else {
+    //             filterByIngredient(arrayOfIngredients, (err, data) => {
+    //                 if (err) {
+    //                     callback(err, null);
+    //                 } else {
+    //                     overallDrinksFound.concat(data.data.drinks);
+    //                     callback(null, overallDrinksFound);
+    //                 }
+    //             });
+    //         }
+    //     }
     // }
+    
+    // recursivelyFind15Drinks(list);
+
+
+
+
+
+
+
+
+
+
+    let string = JSON.stringify(list);
+    let newList = string.split('"').join(''); // turn into a string for the url
+
+    newList = newList.split(''); 
+    newList.splice(0,1);
+    newList.splice(newList.length-1, 1); // remove the brackets
+    newList = newList.join('');
+
+    if (newList.split(',').length > 1) {
+        axios.get(`https://www.thecocktaildb.com/api/json/v2/${API_KEY}/filter.php?i=${newList}`)
+        .then(data => callback(null, data))
+        .catch(err => callback(err, null));
+    } else {
+        filterByIngredient(newList, callback);
+    }
 }
 
 // Search for a drink based on name
