@@ -54,16 +54,16 @@ const filterSearchDrinks = (list, cbFunction) => {
     const overallDrinksFound = [];
 
     let someWords = "THIS HAS SPACES";
-    //someWords.split(" ").join('_');
-    someWords.replace(" ", "_");
-    console.log("HERERERERERRE ____>>>> " + someWords);
+    // const regex = /\s/g;
+    let newString = someWords.split(" ").join('_');
+    console.log("HERERERERERRE ____>>>> " + newString);
 
     const recursivelyFind15Drinks = (ingredientsList, drinksFound, callback) => {
         // takes in an ingredients list. 
         let stringArrayOfIngredients = JSON.stringify(ingredientsList);
         // splits and turns the list into a string
         let arrayOfIngredients = stringArrayOfIngredients.split('"').join(''); // Remove the quotes
-        arrayOfIngredients.split(' ').join('_'); // Add underscores for multiword filters
+        arrayOfIngredients = arrayOfIngredients.split(' ').join('_'); // Add underscores for multiword filters
         arrayOfIngredients = arrayOfIngredients.split('');
         arrayOfIngredients.splice(0, 1); // remove the front brackets
         arrayOfIngredients.splice(arrayOfIngredients.length - 1, 1); // remove the back brackets
