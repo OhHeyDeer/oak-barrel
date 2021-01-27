@@ -49,80 +49,104 @@ const filterByIngredient = (ingredient, callback) => {
 }
 
 // Search for a drink based on ingredients
-const filterSearchDrinks = (list, callback) => {
+const filterSearchDrinks = (list, cbFunction) => {
     // good ingredients and bad ingredients list
-    // const overallDrinksFound = [];
+    const overallDrinksFound = [];
 
-    // const recursivelyFind15Drinks = (ingredientsList) => {
-    //     // takes in an ingredients list. 
-    //     let stringArrayOfIngredients = JSON.stringify(ingredientsList);
-    //     // splits and turns the list into a string
-    //     let arrayOfIngredients = stringArrayOfIngredients.split('"').join(''); // Remove the quotes
-    //     arrayOfIngredients = arrayOfIngredients.split('');
-    //     arrayOfIngredients.splice(0, 1); // remove the front brackets
-    //     arrayOfIngredients.splice(arrayOfIngredients.length - 1, 1); // remove the back brackets
-    //     arrayOfIngredients = arrayOfIngredients.join(''); // join into a list of comma separated words/ingredients
+    let someWords = "THIS HAS SPACES";
+    //someWords.split(" ").join('_');
+    someWords.replace(" ", "_");
+    console.log("HERERERERERRE ____>>>> " + someWords);
 
-    //     // queries the API
-    //     if (arrayOfIngredients.split(',').length > 1) { // Check which query to make
-    //         axios.get(`https://www.thecocktaildb.com/api/json/v2/${API_KEY}/filter.php?i=${arrayOfIngredients}`)
-    //             .then(data => {
-    //                 console.log(data);
-    //                 if (data.drinks.length + overallDrinksFound.length < 15) {
-    //                     overallDrinksFound.concat(data.data.drinks);
-    //                     // remove last ingredient and run again
-    //                     ingredientsList.pop();
-    //                     recursivelyFind15Drinks(ingredientsList);
-    //                 } else {
-    //                     callback(null, overallDrinksFound);
-    //                 }
-    //             })
-    //             .catch(err => {
-    //                 console.log(err);
-    //                 callback(err,null);
-    //             });
-    //     } else {
-    //         if (overallDrinksFound.length > 9) {
-    //             callback(null, {data: {data: {drinks: overallDrinksFound}}})
-    //         } else {
-    //             filterByIngredient(arrayOfIngredients, (err, data) => {
-    //                 if (err) {
-    //                     callback(err, null);
-    //                 } else {
-    //                     overallDrinksFound.concat(data.data.drinks);
-    //                     callback(null, overallDrinksFound);
-    //                 }
-    //             });
-    //         }
-    //     }
-    // }
-    
-    // recursivelyFind15Drinks(list);
+    const recursivelyFind15Drinks = (ingredientsList, drinksFound, callback) => {
+        // takes in an ingredients list. 
+        let stringArrayOfIngredients = JSON.stringify(ingredientsList);
+        // splits and turns the list into a string
+        let arrayOfIngredients = stringArrayOfIngredients.split('"').join(''); // Remove the quotes
+        arrayOfIngredients.split(' ').join('_'); // Add underscores for multiword filters
+        arrayOfIngredients = arrayOfIngredients.split('');
+        arrayOfIngredients.splice(0, 1); // remove the front brackets
+        arrayOfIngredients.splice(arrayOfIngredients.length - 1, 1); // remove the back brackets
+        arrayOfIngredients = arrayOfIngredients.join(''); // join into a list of comma separated words/ingredients
+
+        // WTH IS HAPPENING HERE? -- CANNOT REPLACE SPACES WITH UNDERSCORES WHICH IS BREAKING THE AXIOS REQUESTS TO THE API
 
 
+        // queries the API
+        if (ingredientsList.length > 1) { // Check which query to make
+            console.log(arrayOfIngredients);
+            axios.get(`https://www.thecocktaildb.com/api/json/v2/${API_KEY}/filter.php?i=${arrayOfIngredients}`)
+                .then((data) => {
+                    console.log(data);
 
-
-
-
-
-
-
-
-    let string = JSON.stringify(list);
-    let newList = string.split('"').join(''); // turn into a string for the url
-
-    newList = newList.split(''); 
-    newList.splice(0,1);
-    newList.splice(newList.length-1, 1); // remove the brackets
-    newList = newList.join('');
-
-    if (newList.split(',').length > 1) {
-        axios.get(`https://www.thecocktaildb.com/api/json/v2/${API_KEY}/filter.php?i=${newList}`)
-        .then(data => callback(null, data))
-        .catch(err => callback(err, null));
-    } else {
-        filterByIngredient(newList, callback);
+                    if (data.data.drinks === 'None Found') {
+                        // remove last ingredient and run again
+                        console.log('NONE FOUND --> POP AND TRY AGAIN');
+                        let newIngredients = ingredientsList;
+                        newIngredients.pop();
+                        recursivelyFind15Drinks(newIngredients, drinksFound, callback);
+                    } else {
+                        if (data.data.drinks.length + drinksFound.length < 15) {
+                            console.log('SOME FOUND --> Pop and try again after adding to the drinks found');
+                            drinksFound.concat(data.data.drinks);
+                            // remove last ingredient and run again
+                            let newIngredients = ingredientsList;
+                            newIngredients.pop();
+                            recursivelyFind15Drinks(newIngredients, drinksFound, callback);
+                        } else {
+                            console.log('ENOUGH FOUND --> Combine data with drinks found and return with callback.');
+                            drinksFound.concat(data.data.drinks);
+                            callback(null, { data: { drinks: drinksFound } });
+                        }
+                    }  
+                })
+                .catch(err => {
+                    console.log(err);
+                    callback(err,null);
+                });
+        } else {
+            if (drinksFound.length > 9) {
+                callback(null, { data: { drinks: drinksFound } })
+            } else {
+                filterByIngredient(arrayOfIngredients, (err, data) => {
+                    if (err) {
+                        callback(err, null);
+                    } else {
+                        drinksFound.concat(data.data.drinks);
+                        console.log(drinksFound);
+                        callback(null, { data: { drinks: drinksFound} } );
+                    }
+                });
+            }
+        }
     }
+    
+    recursivelyFind15Drinks(list, overallDrinksFound, cbFunction);
+
+
+
+
+
+
+
+
+
+
+    // let string = JSON.stringify(list);
+    // let newList = string.split('"').join(''); // turn into a string for the url
+
+    // newList = newList.split(''); 
+    // newList.splice(0,1);
+    // newList.splice(newList.length-1, 1); // remove the brackets
+    // newList = newList.join('');
+
+    // if (newList.split(',').length > 1) {
+    //     axios.get(`https://www.thecocktaildb.com/api/json/v2/${API_KEY}/filter.php?i=${newList}`)
+    //     .then(data => callback(null, data))
+    //     .catch(err => callback(err, null));
+    // } else {
+    //     filterByIngredient(newList, callback);
+    // }
 }
 
 // Search for a drink based on name
