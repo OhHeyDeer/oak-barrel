@@ -53,11 +53,6 @@ const filterSearchDrinks = (list, cbFunction) => {
     // good ingredients and bad ingredients list
     const overallDrinksFound = [];
 
-    let someWords = "THIS HAS SPACES";
-    // const regex = /\s/g;
-    let newString = someWords.split(" ").join('_');
-    console.log("HERERERERERRE ____>>>> " + newString);
-
     const recursivelyFind15Drinks = (ingredientsList, drinksFound, callback) => {
         // takes in an ingredients list. 
         let stringArrayOfIngredients = JSON.stringify(ingredientsList);
@@ -68,8 +63,6 @@ const filterSearchDrinks = (list, cbFunction) => {
         arrayOfIngredients.splice(0, 1); // remove the front brackets
         arrayOfIngredients.splice(arrayOfIngredients.length - 1, 1); // remove the back brackets
         arrayOfIngredients = arrayOfIngredients.join(''); // join into a list of comma separated words/ingredients
-
-        // WTH IS HAPPENING HERE? -- CANNOT REPLACE SPACES WITH UNDERSCORES WHICH IS BREAKING THE AXIOS REQUESTS TO THE API
 
 
         // queries the API
