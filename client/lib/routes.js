@@ -86,15 +86,12 @@ const filterSearchDrinks = (list, cbFunction) => {
                         if (data.data.drinks.length + drinksFound.length < 15) {
                             console.log('SOME FOUND --> Pop and try again after adding to the drinks found');
 
-                            // drinksFound.concat(data.data.drinks);
-
                             for(let y in data.data.drinks) {
-                                if (!namesFound.includes(data.data.drinks[y].strDrink)) { // Need to compare the string names or icons.... maybe build out a new array to store names as the other stores objects
+                                if (!namesFound.includes(data.data.drinks[y].strDrink)) { // Need to compare the string names so that we know not to repeat objects in our drinks array.
                                     drinksFound.push(data.data.drinks[y]);
                                     namesFound.push(data.data.drinks[y].strDrink);
                                 }
                             }
-                            
                             
                             // remove last ingredient and run again
                             let newIngredients = ingredientsList;
@@ -102,16 +99,14 @@ const filterSearchDrinks = (list, cbFunction) => {
                             recursivelyFind15Drinks(newIngredients, drinksFound, callback);
                         } else {
                             console.log('ENOUGH FOUND --> Combine data with drinks found and return with callback.');
-
-                            // drinksFound.concat(data.data.drinks);
                             for (let x in data.data.drinks) {
-                                if (!namesFound.includes(data.data.drinks[x].strDrink)) { // Need to compare the string names or icons.... maybe build out a new array to store names as the other stores objects
+                                if (!namesFound.includes(data.data.drinks[x].strDrink)) { // Need to compare the string names so that we know not to repeat objects in our drinks array.
                                     drinksFound.push(data.data.drinks[x]);
                                     namesFound.push(data.data.drinks[x].strDrink);
                                 }
                             }
 
-                            console.log('Returning: ', drinksFound);
+                            // console.log('Returning: ', drinksFound);
                             callback(null, { data: { drinks: drinksFound } });
                         }
                     }  
