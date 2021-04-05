@@ -53,6 +53,7 @@ const filterSearchDrinks = (list, cbFunction) => {
     // good ingredients and bad ingredients list
 
     const overallDrinksFound = [];
+    const namesFound = [];
 
     const recursivelyFind15Drinks = (ingredientsList, drinksFound, callback) => {
         // takes in an ingredients list. 
@@ -80,7 +81,7 @@ const filterSearchDrinks = (list, cbFunction) => {
                         console.log('NONE FOUND --> POP AND TRY AGAIN');
                         let newIngredients = ingredientsList;
                         newIngredients.pop();
-                        recursivelyFind15Drinks(newIngredients, drinksFound, callback);
+                        recursivelyFind15Drinks(newIngredients, drinksFound, callback); // DrinksFound is still empty here
                     } else {
                         if (data.data.drinks.length + drinksFound.length < 15) {
                             console.log('SOME FOUND --> Pop and try again after adding to the drinks found');
@@ -88,8 +89,9 @@ const filterSearchDrinks = (list, cbFunction) => {
                             // drinksFound.concat(data.data.drinks);
 
                             for(let y in data.data.drinks) {
-                                if (!drinksFound.includes(data.data.drinks[y])) { // Need to compare the string names or icons.... maybe build out a new array to store names as the other stores objects
+                                if (!namesFound.includes(data.data.drinks[y].strDrink)) { // Need to compare the string names or icons.... maybe build out a new array to store names as the other stores objects
                                     drinksFound.push(data.data.drinks[y]);
+                                    namesFound.push(data.data.drinks[y].strDrink);
                                 }
                             }
                             
@@ -103,8 +105,9 @@ const filterSearchDrinks = (list, cbFunction) => {
 
                             // drinksFound.concat(data.data.drinks);
                             for (let x in data.data.drinks) {
-                                if (!drinksFound.includes(data.data.drinks[x])) {
+                                if (!namesFound.includes(data.data.drinks[x].strDrink)) { // Need to compare the string names or icons.... maybe build out a new array to store names as the other stores objects
                                     drinksFound.push(data.data.drinks[x]);
+                                    namesFound.push(data.data.drinks[x].strDrink);
                                 }
                             }
 
