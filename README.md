@@ -4,6 +4,7 @@
 * A Full Stack cocktail selection application that allows a user to search through a database of cocktails, filtering out drinks based on the ingredients they have.
 * Contains Authentication and allows a user to sign in to store a list of ingredients they own
 * Stores a users favorite drinks within their browsers local storage, giving them access everytime they open the page.
+* Uses a set of functions to parse the data in order to get a variety of drinks when a user searches using multiple ingredients.
 
 ## Application in Use:
 ![](drinks-r-us1.gif)

@@ -102,6 +102,7 @@ const RandomDrinks = () => {
                     )}
                 </Carousel>
                 <Modal show={shouldShowModal} onHide={() => handleShowModal()}>
+                    <Image src={clickedDrink.strDrinkThumb} thumbnail width="171px" height="180px"></Image>
                     <Modal.Title className="drinks-modal-title">
                         {clickedDrink.strDrink}
                     </Modal.Title>
