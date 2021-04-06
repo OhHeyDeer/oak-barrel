@@ -51,7 +51,7 @@ const SearchBar = ({ searchDrinks }) => {
 
     const handleSearchDrinks = () => {
         // Takes the list of ingredients and searches for drinks based on them.
-        query.filterSearchDrinks(ingredientFilters, (err, data) => {
+        query.filterSearchDrinks(ingredientFilters, (err, data, ingredients) => {
             if (err) {
                 throw err;
             } else {
@@ -59,14 +59,14 @@ const SearchBar = ({ searchDrinks }) => {
                 if (drinks === 'None Found') {
                     // Tells the user there are no drinks for the ingredients given
                     changeDrinksFound(false);
-
-                    // FUTURE ENHANCEMENT: if none are found, search again with one less ingredient until 10 similar drinks can be found. -- CODE ON BACKEND MAKE A RECURSIVE QUERY                  
+                    changeIngredientFilters(ingredients);
                 } else {
                     // Callback to change/render the list
                     changeDrinksFound(true);
                     searchDrinks(drinks);
+                    changeIngredientFilters(ingredients);
                 }
-
+                
             }
         });
     }

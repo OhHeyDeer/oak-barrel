@@ -54,6 +54,7 @@ const filterSearchDrinks = (list, cbFunction) => {
 
     const overallDrinksFound = [];
     const namesFound = [];
+    const heldIngredients = [... list];
 
     const recursivelyFind15Drinks = (ingredientsList, drinksFound, callback) => {
         // takes in an ingredients list. 
@@ -65,9 +66,6 @@ const filterSearchDrinks = (list, cbFunction) => {
         arrayOfIngredients.splice(0, 1); // remove the front brackets
         arrayOfIngredients.splice(arrayOfIngredients.length - 1, 1); // remove the back brackets
         arrayOfIngredients = arrayOfIngredients.join(''); // join into a list of comma separated words/ingredients
-
-        console.log(ingredientsList);
-        console.log(arrayOfIngredients);
 
 
         // queries the API
@@ -107,7 +105,7 @@ const filterSearchDrinks = (list, cbFunction) => {
                             }
 
                             // console.log('Returning: ', drinksFound);
-                            callback(null, { data: { drinks: drinksFound } });
+                            callback(null, { data: { drinks: drinksFound } }, heldIngredients );
                         }
                     }  
                 })
