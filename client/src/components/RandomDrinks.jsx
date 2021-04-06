@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import Col from 'react-bootstrap/Col';
 import Modal from 'react-bootstrap/Modal';
+import Image from 'react-bootstrap/Image';
 
 
 // Material UI
@@ -102,11 +103,11 @@ const RandomDrinks = () => {
                     )}
                 </Carousel>
                 <Modal show={shouldShowModal} onHide={() => handleShowModal()}>
-                    <Image src={clickedDrink.strDrinkThumb} thumbnail width="171px" height="180px"></Image>
                     <Modal.Title className="drinks-modal-title">
                         {clickedDrink.strDrink}
                     </Modal.Title>
                     <Modal.Body className="drinks-modal-overall">
+                        <Image src={clickedDrink.strDrinkThumb} thumbnail width="171px" height="180px"></Image> 
                         <h5 style={{ color: "#3797a4" }}>Category: <a style={{ color: "#fcf776" }}>{clickedDrink.strCategory}</a></h5>
                         <h5 style={{ color: "#3797a4" }}>Glass: <a style={{ color: "#fcf776" }}>{clickedDrink.strGlass}</a></h5>
                         <div className="drinks-modal-list">
