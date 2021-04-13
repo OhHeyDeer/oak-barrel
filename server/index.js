@@ -20,15 +20,12 @@ app.get('/users', (req, res) => {
 
 // Request for a username
 app.get('/users/:name', (req,res) => {
-    console.log('Getting One User');
     connection.getOne(req, res)
     .then(data => res.status(200).send(data))
     .catch(err => res.status(404).send(err));
 });
 
 app.put('/users/update', (req, res) => {
-    console.log('Updating One User');
-    console.log(req.params);
     connection.updateOne(req, res)
     .then(data => res.status(201).send(data))
     .catch(err => res.status(401).send(err));
@@ -36,7 +33,6 @@ app.put('/users/update', (req, res) => {
 
 // Add a new user to the db
 app.post('/users/add', (req, res) => {
-    console.log('Adding User');
     connection.addUser(req, res)
         .then(data => res.status(201).send(data))
         .catch(err => res.status(401).send(err));

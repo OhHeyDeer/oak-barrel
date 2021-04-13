@@ -14,7 +14,7 @@ const getOneUser = (username, callback) => {
         .catch(err => callback(err, null));
 }
 const postNewUser = (info, callback) => {
-    axios.get('http://localhost:3333/users', info)
+    axios.post('http://localhost:3333/users/add', info)
         .then(data => callback(null, data))
         .catch(err => callback(err, null));
 }

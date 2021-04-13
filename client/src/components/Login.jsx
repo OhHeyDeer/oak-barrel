@@ -22,7 +22,10 @@ const Login = ({ change, changeUser }) => {
     const [name, changeName] = useState('');
     const [pass, changePass] = useState('');
 
+
+    // UseEffect triggers when the user clicks to login or signup for the website
     useEffect(() => {
+        //
         if (clicked === true && signup === false) {
             query.getOneUser(name, (err, res) => {
                 if (err) {

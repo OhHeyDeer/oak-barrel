@@ -11,9 +11,9 @@ exports.getOne = (req, res) => {
 
 exports.addUser = (req, res) => {
     const newUser = new Users();
-    newUser.username = req.params.name;
-    newUser.password = req.params.pass;
-    newUser.savedIngredients = req.params.ingredients;
+    newUser.username = req.body.name;
+    newUser.password = req.body.pass;
+    newUser.savedIngredients = req.body.ingredients;
 
     return newUser.save();
 }
