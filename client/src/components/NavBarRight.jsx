@@ -68,19 +68,23 @@ const NavBarRight = ({ change, changeVar }) => {
         storage.splice(index, 1);
         localStorage.setItem('my-favorite-drinks', JSON.stringify(storage));
         changeList(storage);
-        change(!changeVar); // In order for the re-render of the random drinks list so that the icons change
+        // In order for the re-render of the random drinks list so that the icons change
+        change(!changeVar); 
     }
 
+    // Opening the Favorite Drinks List
+    // -- Checking the localstorage for any saved drinks from last visit.
     const handleOpenFavorites = () => {
         changeList(JSON.parse(localStorage.getItem('my-favorite-drinks')));
         changeShown(!isShow);
     }
 
+    // Removes an ingredient from the users saved ingredients.
     const removeIngredient = (ingredient) => {
-        // Request to update the current user by removing the ingredient
-
+        
         let newArr = [...favoriteIngredients];
         newArr.splice(newArr.indexOf(ingredient), 1);
+        // Request to update the current user by removing the ingredient
         query.updateExistingUser(loggedUser.username, newArr, (err, data) => {
             if (err) {
                 throw err;
@@ -90,10 +94,12 @@ const NavBarRight = ({ change, changeVar }) => {
         })
     }
 
+    // Adds an ingredient to the users saved ingredients.
     const addIngredient = (ingredient) => {
 
         let newArr = [...favoriteIngredients];
         newArr.push(ingredient);
+        // Makes a request to add an ingredient to the database.
         query.updateExistingUser(loggedUser.username, newArr, (err, data) => {
             if (err) {
                 throw err;
@@ -103,6 +109,7 @@ const NavBarRight = ({ change, changeVar }) => {
         })
     }
     
+    // Gets the details for a drink that is being selected. 
     const handleGetDrinkDetails = (favorite, callback) => {
         
         if (isNotClicked.includes(favorite)) {
@@ -113,6 +120,7 @@ const NavBarRight = ({ change, changeVar }) => {
             changeIsNotClicked([favorite, ...isNotClicked]);
         }
 
+        // Requests the database for the details given the variable 'favorite'.
         query.searchDrinks(favorite, (err, data) => {
             if (err) {
                 throw err;

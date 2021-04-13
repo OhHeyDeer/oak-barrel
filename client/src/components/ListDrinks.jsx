@@ -27,11 +27,11 @@ const ListDrinks = ({ listOfDrinks }) => {
     // -- This allows a user to add ingredients as they go then search based on them.
 
     useEffect(() => {
-        // when list of drinks changes split it into nested arrays for mapping
+        // When list of drinks changes split it into nested arrays for mapping across 
         const newList = [];
         let nestedList = [];
         for(let i = 1; i < listOfDrinks.length; i++) {
-            if (i % 3 === 0) { // On the fourth of every iteration
+            if (i % 3 === 0) { // On every fourth index/ iteration
                 nestedList.push(listOfDrinks[i - 1]);
                 newList.push(nestedList);
                 nestedList = [];
@@ -146,7 +146,6 @@ const ListDrinks = ({ listOfDrinks }) => {
                 </Modal>
             </div>
                 : ''} 
-            {/* Not Sure if this ^^ is working */}
         </Col>
     );
 }
