@@ -22,9 +22,6 @@ const ListDrinks = ({ listOfDrinks }) => {
 
     const [clickedDrink, changeClick] = useState({});
     const [nestedDrinkRows, changeNestedRows] = useState([]);
-    // As a user I want to be able to search an ingredient and see the drinks I can make
-    // Can enter search parameters which appear as minicomponents when added
-    // -- This allows a user to add ingredients as they go then search based on them.
 
     useEffect(() => {
         // When list of drinks changes split it into nested arrays for mapping across 
@@ -45,12 +42,14 @@ const ListDrinks = ({ listOfDrinks }) => {
         changeNestedRows(newList);
     }, [listOfDrinks])
 
+    // Handles adding a favorite drink to localstorage
     const handleAddFavorite = (drink) => {
         const storage = JSON.parse(localStorage.getItem('my-favorite-drinks'));
         localStorage.setItem('my-favorite-drinks', JSON.stringify([drink.strDrink, ...storage]))
         changeFavs(storage);
     }
 
+    // Handles adding a new favorite drink to localstorage
     const handleRemoveFavorite = (drink) => {
         const favoritesList = JSON.parse(localStorage.getItem('my-favorite-drinks'));
         let storage = [...favoritesList];
@@ -63,9 +62,9 @@ const ListDrinks = ({ listOfDrinks }) => {
         };
     }
 
+    // Handles when a drink is clicked on in the list of drinks.
     const handleDrinkClick = (drink) => {
-
-        console.log(drink);
+        // Data about the drink is requested and then the clickedDrink variable is changed to contain the data.
         query.searchDrinks(drink.strDrink, (err, data) => {
             if (err) {
                 throw err;
@@ -78,6 +77,7 @@ const ListDrinks = ({ listOfDrinks }) => {
         });
     }
     
+    // Handles the closing of the modal and the reseting of the clickedDrink variable.
     const handleShowModal = () => {
         changeClick({});
         changeShowModal(false);

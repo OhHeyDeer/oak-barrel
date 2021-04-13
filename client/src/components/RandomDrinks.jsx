@@ -23,6 +23,7 @@ const RandomDrinks = () => {
 
     const [clickedDrink, changeClick] = useState({});
 
+    // On Load, retrieve the list of favorite drinks from localstorage or create a new list
     useEffect(() => {
         let unparsed = localStorage.getItem('my-favorite-drinks');
         let storage = JSON.parse(unparsed);
@@ -35,18 +36,19 @@ const RandomDrinks = () => {
             if (err) {
                 throw err;
             } else {
-                // console.log(res.data.drinks);
                 changeRandomList(res.data.drinks);
                 changeFavs(storage);
             }
         })
     }, [])
 
+    // Handles adding a favorite drink to localstoage.
     const handleAddFavorite = (drink) => {
         const storage = JSON.parse(localStorage.getItem('my-favorite-drinks'));
         localStorage.setItem('my-favorite-drinks', JSON.stringify([drink.strDrink, ...storage]))
         changeFavs([drink.strDrink, ...storage]);
     }
+    // Handles removing a favorite drink from localstorage.
     const handleRemoveFavorite = (drink) => {
         let storage = [...favoritesList];
         for (let i = 0; i < favoritesList.length; i++) {
@@ -58,12 +60,12 @@ const RandomDrinks = () => {
         };
     }
 
+    // Handles clicking a drink to see for the information. Requests the database for the drink details.
     const handleDrinkClick = (drink) => {
         query.searchDrinks(drink.strDrink, (err, data) => {
             if (err) {
                 throw err;
             } else {
-                // console.log(data.data.drinks[0]);
                 changeClick(data.data.drinks[0]);
                 setTimeout(() => {
                     changeShowModal(true);
@@ -72,12 +74,12 @@ const RandomDrinks = () => {
         });
     }
 
+    // Handles the closing of the modal.
     const handleShowModal = () => {
         changeClick({});
         changeShowModal(false);
     }
 
-    // console.log('State Change', favoritesList);
     return (
         <div>
             <Col className="carousel-wrapper">
