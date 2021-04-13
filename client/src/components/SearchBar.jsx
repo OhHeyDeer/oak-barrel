@@ -22,6 +22,7 @@ const SearchBar = ({ searchDrinks }) => {
 
     const [drinksFound, changeDrinksFound] = useState(true);
 
+    // On Load, queries the database for the list of all the valid ingredients a user can input.
     useEffect(() => {
         query.getIngredients((err, data) => {
             if (err) {
@@ -32,6 +33,7 @@ const SearchBar = ({ searchDrinks }) => {
         })
     },[])
 
+    // Handles adding an ingredient to the search criteria.
     const addIngredient = (ingredient) => {
         let newArray = [];
         ingredientsList.forEach( string => newArray.push(string.strIngredient1));
@@ -43,12 +45,14 @@ const SearchBar = ({ searchDrinks }) => {
         }
     }
 
+    // Handles removing an ingredient from the search criteria.
     const removeIngredient = (ingredient) => {
         let newArray = [...ingredientFilters];
         newArray.splice(newArray.indexOf(ingredient), 1);
         changeIngredientFilters([...newArray]);
     }
 
+    // Handles searching for drinks based on the state of the current ingredients.
     const handleSearchDrinks = () => {
         // Takes the list of ingredients and searches for drinks based on them.
         query.filterSearchDrinks(ingredientFilters, (err, data, ingredients) => {
